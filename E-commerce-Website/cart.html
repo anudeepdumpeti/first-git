@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Your Cart</title>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <div class="top-nav">
+    <div class="container d-flex">
+      <script>
+        function openWhatsApp() {
+          if (confirm("Do you want to contact us on WhatsApp?")) {
+            window.open("https://wa.me/+911234567890", "_blank"); <!-- Add your mobile number-->
+          }
+        }
+      </script>
+      <p><a href="#" onclick="openWhatsApp()">Order Online Or Call Us: (+91) 1234567890</a></p> <!-- Add your mobile number-->
+      <ul class="d-flex">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="terms.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <div class="nav-center container d-flex">
+      <a href="index.html" class="logo">
+        <h1>Hanger<img src="images/logo.jpeg" alt="Logo" style="height: 40px; margin-right: 10px; width: 60px; height: 60px; border-radius: 50px; margin: 5px;"></h1>
+      </a>
+      <ul class="nav-list d-flex">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="product.html" class="nav-link">Shop</a></li>
+        <li class="nav-item"><a href="terms.html" class="nav-link">Terms</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="icons d-flex">
+        <a href="login.html" class="icon"><i class="bx bx-user"></i></a>
+        <a href="search.html" class="icon"><i class="bx bx-search"></i></a>
+        <a href="cart.html" class="icon"><i class="bx bx-cart"></i></a>
+        <a href="logout.php" class="icon"><i class="bx bx-log-out"></i></a>
+      </div>
+      <div class="hamburger"><i class="bx bx-menu-alt-left"></i></div>
+    </div>
+  </div>
+
+  <!-- Cart Items -->
+  <div class="container cart">
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+
+      <main class="cart-page">
+        <h1>Your Cart</h1>
+        <div id="cart-container">
+          <!-- Cart items will be dynamically loaded here -->
+        </div>
+      </main>
+
+      <tbody id="cart-items">
+        <!-- Cart items will be dynamically injected here -->
+      </tbody>
+    </table>
+
+    <div class="total-price">
+      <table>
+        <tr>
+          <td>Subtotal</td>
+          <td id="subtotal">₹0.00</td>
+        </tr>
+        <tr>
+          <td>Tax (10%)</td>
+          <td id="tax">₹0.00</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td id="total">₹0.00</td>
+        </tr>
+      </table>
+      <!-- Save total to localStorage on checkout -->
+      <a href="checkout.html" class="checkout btn" id="checkout-btn">Proceed To Checkout</a>
+    </div>
+  </div>
+
+  <script>
+    // Cart data
+    let cart = JSON.parse(localStorage.getItem("cart")) || [
+      { id: 2, name: "womens kurta", price: 1000, quantity: 1, image: "images/product-2.jpeg" },
+      { id: 3, name: "mens DNX pant", price: 800, quantity: 1, image: "images/product-3.jpeg" },
+    ];
+
+    // Function to render cart items
+    function renderCartItems() {
+      const cartItemsContainer = document.getElementById("cart-items");
+      const subtotalEl = document.getElementById("subtotal");
+      const taxEl = document.getElementById("tax");
+      const totalEl = document.getElementById("total");
+
+      cartItemsContainer.innerHTML = ""; // Clear existing items
+      let subtotal = 0;
+
+      cart.forEach((item, index) => {
+        subtotal += item.price * item.quantity;
+
+        const cartRow = document.createElement("tr");
+        cartRow.innerHTML = `
+          <td>
+            <div class="cart-info">
+              <img src="${item.image}" alt="${item.name}" />
+              <div>
+                <p>${item.name}</p>
+                <span class="price">₹${item.price}</span><br />
+                <a href="#" class="remove-from-cart" data-index="${index}">remove</a>
+              </div>
+            </div>
+          </td>
+          <td><input type="number" class="quantity" value="${item.quantity}" min="1" data-index="${index}" /></td>
+          <td class="item-subtotal">₹${item.price * item.quantity}</td>
+        `;
+        cartItemsContainer.appendChild(cartRow);
+      });
+
+      // Calculate and update totals
+      const tax = subtotal * 0.1;
+      const total = subtotal + tax;
+
+      subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
+      taxEl.textContent = `₹${tax.toFixed(2)}`;
+      totalEl.textContent = `₹${total.toFixed(2)}`;
+
+      // Save the total to localStorage for the order confirmation page
+      localStorage.setItem("totalAmount", total.toFixed(2));
+
+      // Attach event listeners for "Remove" and "Quantity Change"
+      attachEventListeners();
+    }
+
+    // Function to attach event listeners
+    function attachEventListeners() {
+      // Remove item from cart
+      document.querySelectorAll(".remove-from-cart").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          const index = e.target.dataset.index;
+          cart.splice(index, 1);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          renderCartItems();
+        });
+      });
+
+      // Update quantity
+      document.querySelectorAll(".quantity").forEach((input) => {
+        input.addEventListener("change", (e) => {
+          const index = e.target.dataset.index;
+          const newQuantity = parseInt(e.target.value);
+          if (newQuantity > 0) {
+            cart[index].quantity = newQuantity;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCartItems();
+          } else {
+            alert("Quantity must be at least 1");
+            e.target.value = 1; // Reset to 1 if invalid
+          }
+        });
+      });
+    }
+
+    // Render cart items on page load
+    renderCartItems();
+  </script>
+
+  <script src="js/cart.js"></script>
+</body>
+
+</html>

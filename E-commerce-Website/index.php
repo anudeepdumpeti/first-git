@@ -1,0 +1,577 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("location: login.html");
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+    <!-- Glide js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css">
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+      /* Hide elements with the class */
+      .hide {
+          display: none;
+      }
+
+      /* Style the subscription message */
+      .subscribe-message {
+          color: green;
+          font-size: 1rem;
+          margin-top: 1rem;
+      }
+    </style>
+
+    <title>ecommerce Website</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <!-- Top Nav -->
+      <div class="top-nav">
+        <div class="container d-flex">
+
+          <script>
+            function openWhatsApp() {
+              if (confirm("Do you want to contact us on WhatsApp?")) {
+                window.open("https://wa.me/+911234567890", "_blank"); <!-- Add your mobile number-->
+              }
+            }
+          </script>
+          
+        </head>
+        <body>
+          <p><a href="#" onclick="openWhatsApp()">Order Online Or Call Us: (+91) 1234567890</a></p> <!-- Add your mobile number-->
+          <ul class="d-flex">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="navigation">
+        <div class="nav-center container d-flex">
+         
+        <a href="index.html" class="logo"><h1>Hanger<img src="images/logo.jpeg" alt="Logo" 
+          style="height: 40px; margin-right: 10px;  width: 40px; height: 40px; border-radius: 50px; margin: 5px;"></h1></a>
+
+          <ul class="nav-list d-flex">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="product.html" class="nav-link">Shop</a>
+            </li>
+            <li class="nav-item">
+            <a href="terms.html" class="nav-link">Terms</a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">Contact</a>
+            </li>
+          </ul>
+
+          <div class="icons d-flex">
+            <a href="login.html" class="icon">
+              <i class="bx bx-user"></i>
+            </a>
+            <a href="logout.php" class="icon">
+              <i class="bx bx-search"></i>
+            </a>
+            <a href="cart.html" class="icon">
+                <i class="bx bx-cart"></i>
+            </a>
+          </div>
+
+          <div class="hamburger">
+            <i class="bx bx-menu-alt-left"></i>
+          </div>
+        </div>
+      </div>
+
+    <div class="hero">
+      <div class="glide" id="glide_1">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <div class="center">
+                <div class="left">
+                  <span class="">New Inspiration 2024</span>
+                  <h1 class="">NEW COLLECTION!</h1>
+                  <p>Trending from men's and women's  style collection</p>
+                  <a href="product.html" class="hero-btn">SHOP NOW</a>
+                </div>
+                <div class="right">
+                    <img class="img1" src="images/hero-1.png" alt="">
+                </div>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="center">
+                <div class="left">
+                  <span>New Inspiration 2024</span>
+                  <h1>THE PERFECT MATCH!</h1>
+                  <p>Trending from men's and women's  style collection</p>
+                  <a href="product.html" class="hero-btn">SHOP NOW</a>
+                </div>
+                <div class="right">
+                  <img class="img2" src="images/hero-2.png" alt="">
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </header>
+
+    <!-- Categories Section -->
+    <section class="section category">
+      <div class="cat-center">
+        <div class="cat">
+          <img src="images/cat3.jpg" alt="">
+          <div>
+            <p>WOMEN'S WEAR</p>
+          </div>
+        </div>
+        <div class="cat">
+          <img src="images/kids.jpg" alt="">
+          <div>
+            <p>KID'S WEAR</p>
+          </div>
+        </div>
+        <div class="cat">
+          <img src="images/cat1.jpg" alt="">
+          <div>
+            <p>MEN'S WEAR</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="section new-arrival">
+      <div class="title">
+        <h1>NEW ARRIVALS</h1>
+        <p>All the latest picked from designer of our store</p>
+      </div>
+
+      <div class="product-center">
+        <div class="product-item">
+          <div class="overlay">
+            <a href="productDetails.html" class="product-thumb">
+              <img src="images/product-8.jpeg" alt="mens shirt">
+            </a>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="productDetails.html">Peter England Jacket</T-shirt></a>
+            <h4>₹2500 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="8">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-3.jpeg" alt="mens DNX pant">
+            </a>
+            <span class="discount">50%</span>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Denim DNX - cotton pant</a>
+            <h4>₹800 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="3">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-2.jpeg" alt="womens cloths">
+            </a>
+          </div>
+          <div class="product-info">
+            <span>WOMEN'S CLOTHES</span>
+            <a href="">Varanga - Kurta</a>
+            <h4>₹1000 /-</h4><option value="" disabled selected>Select size</option>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="2">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-4.jpeg" alt="">
+            </a>
+            <span class="discount">50%</span>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">ETA - Half Shirt</a>
+            <h4>₹900 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="4">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-5.jpeg" alt="womens cloths">
+            </a>
+          </div>
+          <div class="product-info">
+            <span>WOMEN'S CLOTHES</span>
+            <a href="">HRX - T-Shirt</a>
+            <h4>₹900 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="5">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-6.jpeg" alt="mens cloths">
+            </a>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Highlander - Shirt</a>
+            <h4>₹700 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="6">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-7.jpeg" alt="mens cloths">
+            </a>
+            <span class="discount">50%</span>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Tommy Hilfiger T-Shirt</a>
+            <h4>₹1500 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="7">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-2.jpeg" alt="womens cloths">
+            </a>
+          </div>
+          <div class="product-info">
+            <span>WOMEN'S CLOTHES</span>
+            <a href="">Varanga - Kurta</a>
+            <h4>₹1000 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="2">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promo -->
+
+    <section class="section banner">
+<div class="left">
+  <span class="trend">Trend Design</span>
+  <h1>New Collection 2024</h1>
+  <p>New Arrival <span class="color">Sale 50% OFF</span> Limited Time Offer</p>
+  <a href="product.html" class="btn btn-1">Discover Now</a>
+</div>
+<div class="right">
+  <img src="images/banner.png" alt="">
+</div>
+    </section>
+
+    <!-- Featured -->
+  
+    <section class="section new-arrival">
+      <div class="title">
+        <h1>Featured</h1>
+        <p>All the latest picked from designer of our store</p>
+      </div>
+
+      <div class="product-center">
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-7.jpeg" alt="mens cloths">
+            </a>
+            <span class="discount">50%</span>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Tommy Hilfiger T-Shirt</a>
+            <h4>₹1500 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="7">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-4.jpeg" alt="mens cloths">
+            </a>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">ETA Half Shirt</a>
+            <h4>₹900 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="4">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-1.jpeg" alt="mens cloths">
+            </a>
+            <span class="discount">40%</span>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Team Spirit T-Shirt</a>
+            <h4>₹700 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="1">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="images/product-6.jpeg" alt="menscloths">
+            </a>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Highlander Shirt</a>
+            <h4>₹700 /-</h4>
+            <select class="size-selector">
+              <option value="" disabled selected>Select size</option>
+              <option value="28/S">28/S</option>
+              <option value="30/M">30/M</option>
+              <option value="32/L">32/L</option>
+              <option value="34/XL">34/XL</option>
+            </select>
+          </div>
+          <button class="add-to-cart" data-id="6">Add to Cart</button>
+        </div>
+    </section>
+
+     <!-- Contact -->
+     <section class="section contact">
+      <div class="row">
+        <!-- Text Column -->
+        <div class="col">
+          <h2>GET IN TOUCH WITH US...!!</h2>
+          <p>We love our customers, and they can reach us any time
+            of day. We will be at your service 24/7.
+          </p>
+          <!-- Mail Link -->
+          <a href="mailto:support@example.com?subject=Query&body=Hi, I need help with..." class="btn btn-1">Mail Us</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PopUp -->
+<div class="popup hide-popup">
+  <div class="popup-content">
+    <div class="popup-close">
+      <i class='bx bx-x'></i>
+    </div>
+    <div class="popup-left">
+      <div class="popup-img-container">
+        <img class="popup-img" src="images/popup.jpg" alt="popup">
+      </div>
+    </div>
+    <div class="popup-right">
+      <div class="right-content">
+        <h1>Get Discount <span>50%</span> Off</h1>
+        <p>Sign up to our HANGER and save 30% for your next purchase. No spam, we promise!</p>
+        <form action="#" id="popup-form">
+          <input type="email" placeholder="Enter your email..." class="popup-form" id="email-input" required>
+          <button type="submit" class="popup-button">Subscribe</button>
+        </form>
+        <p class="subscribe-message hide">Thank you for subscribing!</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// Selecting elements
+const popup = document.querySelector('.popup');
+const form = document.querySelector('#popup-form');
+const closeButton = document.querySelector('.popup-close i');
+const subscribeMessage = document.querySelector('.subscribe-message');
+
+// Show the popup initially (you can customize when to show it)
+setTimeout(() => {
+  popup.classList.remove('hide-popup');
+}, 5000); // Popup appears after 5 seconds
+
+// Close the popup when the close button is clicked
+closeButton.addEventListener('click', () => {
+  popup.classList.add('hide-popup');
+});
+
+// Handle form submission
+form.addEventListener('submit', (e) => {
+  e.preventDefault(); // Prevent actual form submission
+  
+  // Show the subscription message
+  subscribeMessage.classList.remove('hide');
+  
+  // Hide the form after submission
+  form.style.display = 'none';
+
+  // Optionally hide the popup after a delay
+  setTimeout(() => {
+    popup.classList.add('hide-popup');
+  }, 3000); // Popup disappears after 3 seconds
+});
+
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Add event listeners to all "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart').forEach((button) => {
+      button.addEventListener('click', function () {
+        // Get the parent product-item container
+        const productItem = this.closest('.product-item');
+
+        // Get the product name
+        const productNameElement = productItem.querySelector('.product-info a');
+        const productName = productNameElement ? productNameElement.textContent.trim() : 'Unknown Product';
+
+        // Get the associated size selector within the same product item
+        const sizeSelector = productItem.querySelector('.size-selector');
+
+        // Get the selected size value
+        const selectedSize = sizeSelector ? sizeSelector.value : null;
+
+        // Debugging: Log product name and selected size
+        console.log('Product Name:', productName);
+        console.log('Selected Size:', selectedSize);
+
+        // Check if a size is selected (if size selector exists)
+        if (sizeSelector && !selectedSize) {
+          alert('Please select a size before adding to the cart.');
+        } else {
+          alert(`Product: ${productName}, Size: ${selectedSize || 'N/A'} has been added to your cart!`);
+        }
+      });
+    });
+  });
+</script>
+</body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+  <script src="js/slider.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/cart.js"></script>
+
+</html>
+

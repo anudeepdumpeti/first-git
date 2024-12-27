@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+    
+    <!-- Custom Stylesheet -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h4 {
+            text-align: center;
+            color: #333;
+        }
+
+        .confirmation-details {
+            margin-top: 20px;
+            padding: 10px 0;
+        }
+
+        .confirmation-details h4 {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .confirmation-details p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .cart-details {
+            margin-top: 20px;
+        }
+
+        .cart-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .cart-details th, .cart-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .cart-details th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .delivery-date, .total-amount {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .delivery-date {
+            background-color: #d1e7dd;
+            border: 1px solid #badbcc;
+            color: #0f5132;
+        }
+
+        .total-amount {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+
+    <title>Order Confirmation</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Thank You for Your Order!</h2>
+
+        <!-- Billing Information -->
+        <div class="confirmation-details">
+            <h4>Billing Information:</h4>
+            <p><strong>Full Name:</strong> <span id="fullname"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Address:</strong> <span id="address"></span></p>
+            <p><strong>City:</strong> <span id="city"></span></p>
+            <p><strong>State:</strong> <span id="state"></span></p>
+            <p><strong>ZIP Code:</strong> <span id="zip"></span></p>
+        </div>
+
+        <!-- Payment Information -->
+        <div class="confirmation-details">
+            <h4>Payment Information:</h4>
+            <p><strong>Name on Card:</strong> <span id="cardname"></span></p>
+            <p><strong>Card Number:</strong> <span id="cardnumber"></span></p>
+            <p><strong>Expiration Date:</strong> <span id="expmonth"></span> <span id="expyear"></span></p>
+        </div>
+
+        <!-- Cart Details -->
+        <div class="cart-details">
+            <h4>Order Summary:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-details">
+                    <!-- Cart items will be rendered here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Delivery Date -->
+        <div class="delivery-date">
+            <h4>Expected Delivery Date:</h4>
+            <p id="delivery-date"></p>
+        </div>
+
+        <!-- Total Order Amount -->
+        <div class="total-amount">
+            <table>
+              <tr>
+                <td>Subtotal</td>
+                <td id="subtotal">₹0.00</td>
+              </tr>
+              <tr>
+                <td>Tax (10%)</td>
+                <td id="taxEl">₹0.00</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td id="totalEl">₹0.00</td>
+              </tr>
+            </table>
+
+        <a href="product.html" class="btn">Continue Shopping</a>
+    </div>
+
+    <!-- Script to load data from localStorage -->
+    <script>
+        // Retrieve checkout and cart data from localStorage
+        const checkoutData = JSON.parse(localStorage.getItem("checkoutData"));
+        const cartData = JSON.parse(localStorage.getItem("cart"));
+
+        if (checkoutData && cartData) {
+            // Populate the billing information
+            document.getElementById("fullname").innerText = checkoutData.fullname;
+            document.getElementById("email").innerText = checkoutData.email;
+            document.getElementById("address").innerText = checkoutData.address;
+            document.getElementById("city").innerText = checkoutData.city;
+            document.getElementById("state").innerText = checkoutData.state;
+            document.getElementById("zip").innerText = checkoutData.zip;
+
+            // Populate the payment information
+            document.getElementById("cardname").innerText = checkoutData.cardname;
+            document.getElementById("cardnumber").innerText = "**** **** **** " + checkoutData.cardnumber.slice(-4);
+            document.getElementById("expmonth").innerText = checkoutData.expmonth;
+            document.getElementById("expyear").innerText = checkoutData.expyear;
+
+            // Populate the cart details
+            const cartDetails = document.getElementById("cart-details");
+            cartData.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>₹${(item.price * item.quantity).toFixed(2)}</td>
+                `;
+                cartDetails.appendChild(row);
+            });
+
+            // Calculate and display the total amount
+            const totalAmount = cartData.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            const tax = totalAmount * 0.1
+            const total=tax+totalAmount
+            subtotal.textContent = `₹${totalAmount.toFixed(2)}`;
+            taxEl.textContent = `₹${tax.toFixed(2)}`;
+            totalEl.textContent = `₹${total.toFixed(2)}`;
+
+
+            // Calculate the expected delivery date (5 days from today)
+            const currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() + 5);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const deliveryDate = currentDate.toLocaleDateString(undefined, options);
+
+            document.getElementById("delivery-date").innerText = deliveryDate;
+        } else {
+            alert("No order data found. Please complete the checkout process.");
+            window.location.href = "checkout.html";
+        }
+    </script>
+</body>
+
+</html>
