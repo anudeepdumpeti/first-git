@@ -1,1 +1,1 @@
-login and registration webpage using HTML,CSS. This webpage is based on selling farmers agriculture seeds and pesticides. Here the Company named as 'SeedSage' has now I have completed frontend and I'm still working on backend and connectivity of database.
+
